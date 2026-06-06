@@ -1,0 +1,34 @@
+@blaze(fold: true, unsafe: [
+    // laraliveui:with-field props
+    'name', 'label', 'badge',
+    'description', 'description:trailing',
+    'label:badge', 'label:aside', 'label:trailing',
+    'error:name', 'error:bag', 'error:message', 'error:icon', 'error:nested', 'error:deep',
+])
+
+
+@props([
+    'variant' => null,
+    'size' => null,
+    'name' => null,
+])
+
+@php
+// We only want to show the name attribute on the checkbox if it has been set
+// manually, but not if it has been set from the wire:model attribute...
+$showName = isset($name);
+
+if (! isset($name)) {
+    $name = $attributes->whereStartsWith('wire:model')->first();
+}
+
+$classes = Laraliveui::classes()
+    ->add('flex flex-wrap gap-3')
+    ;
+@endphp
+
+<laraliveui:with-field :$attributes>
+    <ui-checkbox-group {{ $attributes->class($classes) }} @if($showName) name="{{ $name }}" @endif data-laraliveui-checkbox-group-pills>
+        {{ $slot }}
+    </ui-checkbox-group>
+</laraliveui:with-field>
