@@ -4,6 +4,8 @@ A comprehensive UI component library for Livewire applications, built with Tailw
 
 > **Note:** This is a community-driven open-source project. LaraLiveUI provides both free and open-source components for your Livewire applications.
 
+📚 **[Dokumentasi Lengkap →](https://elnasnato.github.io/laraliveui-docs/)**
+
 ## Prerequisites
 
 - Laravel v10.0+
