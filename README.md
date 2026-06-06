@@ -13,7 +13,7 @@ A comprehensive UI component library for Livewire applications, built with Tailw
 ## Installation
 
 ```bash
-composer require laralive/laraliveui
+composer require elnasnato/laraliveui
 ```
 
 ## Quick Start
@@ -41,7 +41,7 @@ Add to your `resources/css/app.css`:
 
 ```css
 @import 'tailwindcss';
-@import '../../vendor/laralive/laraliveui/dist/laraliveui.css';
+@import '../../vendor/elnasnato/laraliveui/dist/laraliveui.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 ```
