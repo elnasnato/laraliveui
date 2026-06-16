@@ -2,6 +2,10 @@
 
 ## Project Overview
 
+LaraLiveUI is a **UI clone of FluxUI v2** for Laravel + Livewire + Tailwind CSS v4. FluxUI v2 has 49 component groups (29 free + 2 layouts + 18 pro). All are ported to `laraliveui:` namespace.
+
+**Sheaf UI** (https://sheafui.dev, https://github.com/sheafui/components) is used as a functional reference for implementing FluxUI pro components and extra value-add components that don't exist in FluxUI v2. LaraLiveUI follows FluxUI conventions, NOT SheafUI conventions.
+
 Three interconnected repositories:
 
 ### 1. `elnasnato/laraliveui` (this repo)
@@ -74,6 +78,22 @@ git tag v1.1.x && git push origin v1.1.x
 - GitHub: `elnasnato`
 - PayPal: https://paypal.me/CrunchyNatto
 - FUNDING.yml is synced across all 3 repos
+
+## Value-Add Components (beyond FluxUI v2)
+
+Built from SheafUI functional reference, following LaraLiveUI/FluxUI conventions:
+- **Kbd** (`kbd.blade.php`) — keyboard shortcut display
+- **Theme Switcher** (`theme-switcher.blade.php`) — light/dark/system toggle
+- **Empty** (`empty/index.blade.php`) — empty state placeholder
+- **Key Value** (`key-value/index.blade.php`) — key-value display rows
+- **Tags Input** (`tags-input/index.blade.php`) — tag/chip input with `laraliveui:with-field`
+- **Image Diff** (`image-diff/index.blade.php`) — before/after image comparison slider
+- **Rover** (`rover/index.blade.php` + `rover/item.blade.php`) — roving tabindex keyboard navigation
+- **Combobox** (`combobox/index.blade.php` + `combobox/option.blade.php`) — searchable select
+- **Repeater** (`repeater/index.blade.php`) — repeatable form field groups
+- **Wizard** (`wizard/index.blade.php` + `wizard/step.blade.php`) — multi-step form wizard
+
+Note: Carousel, Navmenu, Navlist exist in LaraLiveUI but are NOT in FluxUI v2.
 
 ## Documentation
 All documentation is at https://elnasnato.github.io/laraliveui-docs/
