@@ -324,11 +324,17 @@ ${t?"}":""}
     Alpine.data('laraliveuiModal', (name, livewireId) => ({
       name: name,
       init() {
-        // handle :show attribute — if the dialog has show="1" or show="true", open it
+        // handle :show attribute
         const showAttr = this.$el.getAttribute('show');
         if (showAttr && showAttr !== '0' && showAttr !== '' && showAttr !== 'false') {
           this.$nextTick(() => this.$el.showModal());
         }
+        // handle open-modal events from trigger buttons
+        document.addEventListener('open-modal', (event) => {
+          if (event.detail === this.name) {
+            this.$el.showModal();
+          }
+        });
       },
       handleShow(event) {
         if (event.detail.name === this.name) {
@@ -338,6 +344,16 @@ ${t?"}":""}
       handleClose(event) {
         if (!event.detail.name || event.detail.name === this.name) {
           this.$el.close();
+        }
+      },
+      // native dialog close event (Escape, backdrop click)
+      closeModal() {
+        // wire:model will be updated by Livewire via the close event
+      },
+      // compatibility with open-modal event (used by some trigger buttons)
+      openModal(event) {
+        if (event.detail === this.name) {
+          this.$el.showModal();
         }
       },
     }));

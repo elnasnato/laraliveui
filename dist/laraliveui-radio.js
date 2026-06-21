@@ -203,6 +203,11 @@
         if (showAttr && showAttr !== '0' && showAttr !== '' && showAttr !== 'false') {
           this.$nextTick(() => this.$el.showModal());
         }
+        document.addEventListener('open-modal', (event) => {
+          if (event.detail === this.name) {
+            this.$el.showModal();
+          }
+        });
       },
       handleShow(event) {
         if (event.detail.name === this.name) {
@@ -212,6 +217,12 @@
       handleClose(event) {
         if (!event.detail.name || event.detail.name === this.name) {
           this.$el.close();
+        }
+      },
+      closeModal() {},
+      openModal(event) {
+        if (event.detail === this.name) {
+          this.$el.showModal();
         }
       },
     }));
