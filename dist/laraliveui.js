@@ -290,3 +290,56 @@ ${t?"}":""}
 
   customElements.define('ui-radio', UIRadio);
 })();
+
+// ---- laraliveui modal -------------------------------------------------------
+(function() {
+  // <ui-modal> wrapper
+  if (!customElements.get('ui-modal')) {
+    customElements.define('ui-modal', class extends HTMLElement {});
+  }
+
+  // <ui-close> — dispatches modal-close on click
+  if (!customElements.get('ui-close')) {
+    customElements.define('ui-close', class extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener('click', this._closeHandler);
+      }
+      disconnectedCallback() {
+        this.removeEventListener('click', this._closeHandler);
+      }
+      _closeHandler = () => {
+        const dialog = this.closest('dialog');
+        if (dialog) {
+          const name = dialog.getAttribute('data-modal');
+          document.dispatchEvent(new CustomEvent('modal-close', { detail: { name } }));
+        }
+      };
+    });
+  }
+
+  // laraliveuiModal Alpine data function
+  if (typeof Alpine !== 'undefined' && !Alpine._laraliveuiModalInstalled) {
+    Alpine._laraliveuiModalInstalled = true;
+
+    Alpine.data('laraliveuiModal', (name, livewireId) => ({
+      name: name,
+      init() {
+        // handle :show attribute — if the dialog has show="1" or show="true", open it
+        const showAttr = this.$el.getAttribute('show');
+        if (showAttr && showAttr !== '0' && showAttr !== '' && showAttr !== 'false') {
+          this.$nextTick(() => this.$el.showModal());
+        }
+      },
+      handleShow(event) {
+        if (event.detail.name === this.name) {
+          this.$el.showModal();
+        }
+      },
+      handleClose(event) {
+        if (!event.detail.name || event.detail.name === this.name) {
+          this.$el.close();
+        }
+      },
+    }));
+  }
+})();
